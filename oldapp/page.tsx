@@ -5,10 +5,11 @@ import { Amplify } from 'aws-amplify';
 import config from '@/amplifyconfiguration.json';
 import '@aws-amplify/ui-react/styles.css';
 import type { WithAuthenticatorProps } from '@aws-amplify/ui-react';
+import { AppProps } from 'next/app';
 
 Amplify.configure(config);
 
-function Home({ Component, pageProps, signOut, user }: WithAuthenticatorProps) {
+function Home({ Component, pageProps, signOut, user }: WithAuthenticatorProps & AppProps) {
   return (
     <main className={styles.main}>
       <div className={styles.description}>
