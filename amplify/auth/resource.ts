@@ -1,4 +1,4 @@
-import { defineAuth } from '@aws-amplify/backend';
+import { defineAuth } from "@aws-amplify/backend";
 
 /**
  * Define and configure your auth resource
@@ -32,6 +32,9 @@ export const auth = defineAuth({
   //   },
   // },
   userAttributes: {
+    nickname: {
+      required: true,
+    },
     /** request additional attributes for your app's users */
     // profilePicture: {
     //   mutable: true,

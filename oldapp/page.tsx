@@ -1,13 +1,23 @@
 import Image from 'next/image'
 import styles from './page.module.css'
+import { withAuthenticator } from '@aws-amplify/ui-react';
+import { Amplify } from 'aws-amplify';
+import config from '@/amplifyconfiguration.json';
+import '@aws-amplify/ui-react/styles.css';
+import type { WithAuthenticatorProps } from '@aws-amplify/ui-react';
 
-export default function Home() {
+Amplify.configure(config);
+
+function Home({ Component, pageProps, signOut, user }: WithAuthenticatorProps) {
   return (
     <main className={styles.main}>
       <div className={styles.description}>
         <p>
           Get started by editing&nbsp;
           <code className={styles.code}>app/page.tsx</code>
+        </p>
+        <p>
+          I will do so!
         </p>
       </div>
 
@@ -30,6 +40,11 @@ export default function Home() {
         />
       </div>
 
+      <div className={styles.center}>
+        <h1>Hello {user?.username}</h1>
+        <button onClick={signOut}>Sign out</button>
+        <Component {...pageProps} />
+      </div>
       <div className={styles.grid}>
         <a
           href="https://docs.amplify.aws/gen2/"
@@ -84,3 +99,5 @@ export default function Home() {
     </main>
   )
 }
+
+export default withAuthenticator(Home);
